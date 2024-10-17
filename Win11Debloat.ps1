@@ -75,13 +75,13 @@ function ShowAppSelectionForm {
     # saveButton eventHandler
     $handler_saveButton_Click= 
     {
-        if ($selectionBox.CheckedItems -contains "Microsoft.WindowsStore" -and -not $Silent) {
-            $warningSelection = [System.Windows.Forms.Messagebox]::Show('Are you sure you wish to uninstall the Microsoft Store? This app cannot easily be reinstalled.', 'Are you sure?', 'YesNo', 'Warning')
+        # if ($selectionBox.CheckedItems -contains "Microsoft.WindowsStore" -and -not $Silent) {
+        #     $warningSelection = [System.Windows.Forms.Messagebox]::Show('Are you sure you wish to uninstall the Microsoft Store? This app cannot easily be reinstalled.', 'Are you sure?', 'YesNo', 'Warning')
         
-            if ($warningSelection -eq 'No') {
-                return
-            }
-        }
+        #     if ($warningSelection -eq 'No') {
+        #         return
+        #     }
+        # }
 
         $global:SelectedApps = $selectionBox.CheckedItems
 
@@ -701,8 +701,11 @@ else {
     # Show warning that requires user confirmation, Suppress confirmation if Silent parameter was passed
     if (-not $Silent) {
         Write-Warning "Winget is not installed or outdated. This may prevent Win11Debloat from removing certain apps."
+        Write-Output "Installing Package..."
         Write-Output ""
-        Write-Output "Press any key to continue anyway..."
+        Write-Output ""
+        
+
         $null = [System.Console]::ReadKey()
     }
 }
